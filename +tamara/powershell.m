@@ -26,9 +26,13 @@ if nargin < 1
     return
 end
 
-PS.AddScript(str);
-RES = PS.Invoke();
-success = ~PS.HadErrors;
+try
+    PS.AddScript(str);
+    RES = PS.Invoke();
+    success = ~PS.HadErrors;
+catch
+    success = false;
+end
 
 if ~success
     PS.Dispose()
