@@ -12,17 +12,15 @@ if isstring(filepath)
 end
 
 if strcmpi(stream, '*')
-    [success, D] = tamara.powershell(['Get-Item "', filepath, '" -Stream * | Where-Object {$_.Stream -notcontains '':$DATA''}']);
-    if success
-        C = cell(length(D), 2);
-        for count = 1:size(C, 1)
-            C{count, 2} = char(D{count}.Stream);
-            [success, y] = tamara.powershell(['Get-Item "', filepath,'" | Get-Content -Stream "', C{count, 2}, '"']);
-            if success
-                C{count, 1} = strjoin(y, newline);
-            else
-                break
-            end
+    [success, D] = tamara.powershell(['Get-Item "', filepath, '" -Stream * | Where-Object {$_.Stream -notcontains '':$DATA''} | Select -Expand Stream']);
+    if success        
+        [success, y] = tamara.powershell(['Get-Item "', filepath, '" -Stream * | Where-Object {$_.Stream -notcontains '':$DATA''} | Get-Content']);
+        if success
+            C = cell(length(D), 2);
+            C(:, 1) = y;
+            C(:, 2) = D;
+        else
+            C = cell(0);
         end
     else
         C = cell(0);
