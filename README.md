@@ -45,4 +45,4 @@ BSD 3-Clause, see LICENSE for details
 Copyright (c) 2023, Wolkesson & Hansson Teknisk Akustik AB. All rights reserved.
 \
 \
-[![View read/write ADS on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://mathworks.com/matlabcentral/fileexchange/somelink)
+[![View read/write ADS on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://mathworks.com/matlabcentral/fileexchange/124750-read-write-alternate-data-streams-ads)
