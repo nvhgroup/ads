@@ -28,14 +28,14 @@ success = tamara.ads.set('hello.txt', 'test2', 789)
 \
 % read out all streams, except main stream
 \
-[success, val] = tamara.ads.get('hello.txt', '*')
+[success, val] = tamara.ads.get('hello.txt', '\*')
 \
 \
 % clear all streams, except main stream
 \
 success = tamara.ads.clear('hello.txt')
 \
-[success, val] = tamara.ads.get('hello.txt', '*')
+[success, val] = tamara.ads.get('hello.txt', '\*')
 \
 \
 License:\
