@@ -13,7 +13,7 @@ end
 
 if strcmpi(stream, '*')
     [success, D] = tamara.powershell(['Get-Item "', filepath, '" -Stream * | Where-Object {$_.Stream -notcontains '':$DATA''} | Select -Expand Stream']);
-    if success        
+    if success
         [success, y] = tamara.powershell(['Get-Item "', filepath, '" -Stream * | Where-Object {$_.Stream -notcontains '':$DATA''} | Get-Content']);
         if success
             C = cell(length(D), 2);
