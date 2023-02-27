@@ -27,9 +27,28 @@ if nargin < 1
 end
 
 try
-    PS.AddScript(str);
-    RES = PS.Invoke();
-    success = ~PS.HadErrors;
+    if contains(str, ' & ') || contains(str, ' && ')
+        if contains(str, ' && ')
+            strC = strtrim(strsplit(str, '&&'));
+        else
+            strC = strtrim(strsplit(str, '&'));
+        end
+        y = cell(0);
+        for count = 1:length(strC)
+            [success, temp_out] = tamara.powershell(strC{count});
+            if ~success
+                break
+            end
+            y = [y; temp_out]; %#ok<AGROW>
+        end
+        y(cellfun(@isempty, y)) = [];
+        return
+    else
+        PS.AddScript(str);
+        RES = PS.Invoke();
+        success = ~PS.HadErrors;
+    end
+
 catch
     success = false;
 end
@@ -37,6 +56,8 @@ end
 if ~success
     PS.Dispose()
     PS = [];
+    y = cell(0);
+    return
 end
 
 y = cell(RES.Count, 1);
